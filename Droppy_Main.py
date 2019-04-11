@@ -9,6 +9,16 @@ robot = Dorna()
 pi = pigpio.pi()
 
 def SequenceGen():
+
+    # Purpose:  Generate list of all carriage mounting orientations
+
+    # Assume:   List ungenerated but all positions located
+
+    # End:      List generated
+
+    # Inputs:   None
+
+    # Outputs:  masterList = array of 4 arrays of 14 arrays of constants
     
     masterList=[]
 
@@ -296,6 +306,8 @@ def toCarriage(sequence):
     
     # Trigger drop
     drop(factory)
+
+    sleep(5)
     
     return True
 
@@ -378,6 +390,37 @@ def liftToCrack(location):
     
     return True
 
+def reset():
+
+    factory = PiGPIOFactory(host='169.254.232.97')
+
+    # Purpose:  Reset everything to start conditions
+
+    # Assume:   Arm starts anywhere
+    #           LA starts anywhere
+    #           All tests completed or an error occured
+
+    # End:      Arm in home orientation
+    #           LA at home
+    #           Pneumatics lowered
+
+    # Inputs:   None
+
+    # Outputs:  True if successful (done command)
+    #           False if unsuccessful (kill command)
+
+    # Arm movements list
+##    moveHome = ['xh', 'yh', 'zh', 'ah', 'bh']
+
+    # Move LA to home
+    if LAHome(factory) == False:
+        return False
+
+    # Lower pneumatics
+    raiseLower(False,factory)
+
+    return True
+
 def slowApproachArm(factory):
 
     # Purpose:  Slowly lower effector until vacuum is achieved
@@ -429,9 +472,9 @@ def slowApproachCar(direction, factory):
     # Set direction of slow movement based on direction
     if direction == "up":
         z = 1
-    else if direction == "away":
+    elif direction == "away":
         x = 1
-    else if direction == "45":
+    elif direction == "45":
         x = 0.5
         z = 0.5
 

@@ -41,8 +41,8 @@ def flipStart(factory):
     raiseLower(True, factory)
 
     # Center LA
-    if LAMove(moveFlipC, factory) == False:
-        return False
+##    if LAMove(moveFlipC, factory) == False:
+##        return False
     
     # Home Arm
     robot.home("j1")
@@ -51,7 +51,7 @@ def flipStart(factory):
     print(robot.homed())
 
     # Move arm to its home orientation
-    dornaMove(moveHome)
+##    dornaMove(moveHome)
 
     # Send LA to its home position
     if LAHome(factory) == False:
@@ -61,18 +61,18 @@ def flipStart(factory):
     vpump(True, factory)
 
     # Move arm to top of crack platform
-    dornaMove(moveFlip0)
+##    dornaMove(moveFlip0)
 
     # Slowly lower effector until arm transducer reads vacuum
     if slowApproachArm(factory) == False:
         return False
     
     # Slide phone off of platform
-    if LAMove(moveFlip0, factory) == False:
-        return False
+##    if LAMove(moveFlip0, factory) == False:
+##        return False
 
     # Flip phone over and 
-    dornaMove(moveFlip1)
+##    dornaMove(moveFlip1)
 
     # Check phone hasn't been accidentally released
     if ArmTrans(factory) == False:
@@ -90,10 +90,10 @@ def flipStart(factory):
         return False
 
     # Move arm out of the way
-    dornaMove(moveFlip2)
+##    dornaMove(moveFlip2)
 
     # Move arm to its home orientation
-    dornaMove(moveHome)
+##    dornaMove(moveHome)
 
     return True
 
@@ -127,18 +127,18 @@ def flip(factory):
     vpump(True, factory)
 
     # Move arm to top of crack platform
-    dornaMove(moveFlip0)
+##    dornaMove(moveFlip0)
 
     # Slowly lower effector until arm transducer reads vacuum
     if slowApproachArm(factory) == False:
         return False
     
     # Slide phone off of platform
-    if LAMove(moveFlip0, factory) == False:
-        return False
+##    if LAMove(moveFlip0, factory) == False:
+##        return False
 
     # Flip phone over and 
-    dornaMove(moveFlip1)
+##    dornaMove(moveFlip1)
 
     # Check phone hasn't been accidentally released
     if ArmTrans(factory) == False:
@@ -156,10 +156,10 @@ def flip(factory):
         return False
 
     # Move arm out of the way
-    dornaMove(moveFlip2)
+##    dornaMove(moveFlip2)
 
     # Move arm to its home orientation
-    dornaMove(moveHome)
+##    dornaMove(moveHome)
 
     return True
 
@@ -198,7 +198,7 @@ def toCarriage(sequence, factory):
     # Check whether to grab top of phone or bottom
     if ud == 1:
         # Move arm above phone
-        dornaMove(moveCarrU)
+##        dornaMove(moveCarrU)
 
         # Turn on vacuum
         vpump(True, factory)
@@ -209,7 +209,7 @@ def toCarriage(sequence, factory):
         
     else:
         # Move arm to underside of phone
-        dornaMove(moveCarrD)
+##        dornaMove(moveCarrD)
 
         # Turn on vacuum
         vpump(True, factory)
@@ -223,8 +223,8 @@ def toCarriage(sequence, factory):
         return False
 
     # Move arm up to carriage
-    dornaMove(moveCarr0)
-    dornaMove(moveCarr1)
+##    dornaMove(moveCarr0)
+##    dornaMove(moveCarr1)
     dornaMove(sequence)
 
     # Check phone hasn't been accidentally released
@@ -232,12 +232,12 @@ def toCarriage(sequence, factory):
         return False
     
     # Slow approach at different angles until carriage vacuum achieved
-    if sequence[3] == "aBottom":
-        slowApproachCar("up", factory)
-    else if sequence[3] == "aSide":
-        slowApproachCar("away", factory)
-    else if sequence[3] == "a45":
-        slowApproachCar("45", factory)
+##    if sequence[3] == "aBottom":
+##        slowApproachCar("up", factory)
+##    else if sequence[3] == "aSide":
+##        slowApproachCar("away", factory)
+##    else if sequence[3] == "a45":
+##        slowApproachCar("45", factory)
 
     # Check phone is still on arm
     if ArmTrans(factory) == False:
@@ -315,7 +315,7 @@ def liftToCrack(location, factory):
         return False
 
     # Align arm with bottom of crack platform
-    dornaMove(moveCrack0)
+##    dornaMove(moveCrack0)
 
     # Slide phone onto platform
     if LAHome(factory) == False:
@@ -333,10 +333,10 @@ def liftToCrack(location, factory):
         return False
 
     # Move arm out of the way
-    dornaMove(moveCrack1)
+##    dornaMove(moveCrack1)
 
     # Move arm to its home orientation
-    dornaMove(moveHome)
+##    dornaMove(moveHome)
     
     return True
 

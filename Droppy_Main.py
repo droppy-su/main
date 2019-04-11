@@ -7,9 +7,43 @@ from dorna import Dorna
 import time
 robot = Dorna()
 pi = pigpio.pi()
-factory = PiGPIOFactory(host='169.254.232.97')
 
-def flipStart(factory):
+def SequenceGen():
+    
+    masterList=[]
+
+    sequence = {
+        1:'[x1, y1, z1, a1, b1, ud1]',
+        2:'[x2, y2, z2, a2, b2, ud2]',
+        3:'[x3, y3, z3, a3, b3, ud3]',
+        4:'[x4, y4, z4, a4, b4, ud4]',
+        5:'[x5, y5, z5, a5, b5, ud5]',
+        6:'[x6, y6, z6, a6, b6, ud6]',
+        7:'[x7, y7, z7, a7, b7, ud7]',
+        8:'[x8, y8, z8, a8, b8, ud8]',
+        9:'[x9, y9, z9, a9, b9, ud9]',
+        10:'[x10, y10, z10, a10, b10, ud10]',
+        11:'[x11, y11, z11, a11, b11, ud11]',
+        12:'[x12, y12, z12, a12, b12, ud12]',
+        13:'[x13, y13, z13, a13, b13, ud13]',
+        14:'[x14, y14, z14, a14, b14, ud14]',
+        }
+    
+    for i in range(4):
+        tracker = []
+        for j in range(14):
+            check = 0
+            while check == 0:
+                selector = random.randint(1, 14)
+                if sequence[selector] not in tracker:
+                    tracker.append(sequence[selector])
+                    check = 1
+        masterList.append(tracker)
+    return masterList
+
+def flipStart():
+
+    factory = PiGPIOFactory(host='169.254.232.97')
 
     # Purpose:  Raise pneumatics at start of sequence
     #           Flip phone over on crack platform
@@ -25,7 +59,7 @@ def flipStart(factory):
     #           Phone flipped over
     #           Pneumatics raised
 
-    # Inputs:   factory (IP address)
+    # Inputs:   None
 
     # Outputs:  True if successful (done command)
     #           False if unsuccessful (kill command)
@@ -97,8 +131,10 @@ def flipStart(factory):
 
     return True
 
-def flip(factory):
+def flip():
 
+    factory = PiGPIOFactory(host='169.254.232.97')
+    
     # Purpose:  Flip phone over on crack platform
 
     # Assume:   Arm starts in home orientation
@@ -112,7 +148,7 @@ def flip(factory):
     #           Phone flipped over
     #           Pneumatics raised
 
-    # Inputs:   factory (IP address)
+    # Inputs:   None
 
     # Outputs:  True if successful (done command)
     #           False if unsuccessful (kill command)
@@ -163,7 +199,9 @@ def flip(factory):
 
     return True
 
-def toCarriage(sequence, factory):
+def toCarriage(sequence):
+
+    factory = PiGPIOFactory(host='169.254.232.97')
 
     # Purpose:  Lift phone from either top or bottom of crack platform
     #           Move phone to carriage
@@ -183,7 +221,6 @@ def toCarriage(sequence, factory):
     #           Pneumatics raised
 
     # Inputs:   sequence = [x, y, z, a, b, ud]
-    #           factory (IP address)
 
     # Outputs:  True if successful (done command)
     #           False if unsuccessful (kill command)
@@ -262,7 +299,9 @@ def toCarriage(sequence, factory):
     
     return True
 
-def liftToCrack(location, factory):
+def liftToCrack(location):
+
+    factory = PiGPIOFactory(host='169.254.232.97')
 
     # Purpose:  Pick up phone from drop box
     #           Place it on crack platform
@@ -280,7 +319,6 @@ def liftToCrack(location, factory):
     #           Pneumatics raised
 
     # Inputs:   location = [x, y, z, a, b]
-    #           factory (IP address)
 
     # Outputs:  True if successful (done command)
     #           False if unsuccessful (kill command)
